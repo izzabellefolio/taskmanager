@@ -1,0 +1,47 @@
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <button class="nav-link"
+            [class.active]="filter === 'all'"
+            (click)="setFilter('all')">
+      All
+    </button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link"
+            [class.active]="filter === 'completed'"
+            (click)="setFilter('completed')">
+      Completed
+    </button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link"
+            [class.active]="filter === 'pending'"
+            (click)="setFilter('pending')">
+      Pending
+    </button>
+  </li>
+</ul>
+
+<div *ngIf="tasks.length === 0" class="alert alert-warning text-center">
+  <span *ngIf="filter === 'all'">No tasks added yet.</span>
+  <span *ngIf="filter === 'completed'">No completed tasks yet.</span>
+  <span *ngIf="filter === 'pending'">No pending tasks yet.</span>
+</div>
+
+<ul class="list-group">
+  <li *ngFor="let task of tasks"
+      class="list-group-item d-flex align-items-center">
+    <input
+      type="checkbox"
+      class="form-check-input me-2"
+      [checked]="task.completed"
+      (change)="toggleTask(task.id)" />
+    <span [ngClass]="{'text-decoration-line-through text-muted': task.completed}">
+      {{ task.title }}
+    </span>
+  </li>
+</ul>
+
+<footer class="mt-5 fw-bold sticky-bottom bg-white p-2 border-top">
+  Total tasks: {{ tasks.length }} | Completed: {{ completedCount() }} | Pending: {{ pendingCount() }}
+</footer>
