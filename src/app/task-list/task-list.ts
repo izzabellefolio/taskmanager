@@ -27,19 +27,15 @@ export class TaskList {
     this.filter = filter;
   }
 
-  completedCount(): number {
-    return this.tasks.filter(task => task.completed).length;
-  }
-
-  pendingCount(): number {
-    return this.tasks.filter(task => !task.completed).length;
-  }
-
   ngOnInit(): void {
     this.taskService.getTasks();
   }
 
   toggleTask(id: number) {
     this.taskService.toggleTask(id);
+  }
+
+  deleteTask(id: number) {
+    this.taskService.deleteTask(id);
   }
 }

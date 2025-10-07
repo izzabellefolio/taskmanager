@@ -32,6 +32,9 @@ export class TaskService {
       task.completed = !task.completed;
     }
   }
+  deleteTask(id: number) {
+    this.tasks = this.tasks.filter(t => t.id !== id);
+  }
 
   getTaskCount(): number {
     return this.tasks.length;
